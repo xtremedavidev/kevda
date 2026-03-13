@@ -1,0 +1,63 @@
+﻿"use client";
+import React from "react";
+import Image from "next/image";
+
+const leaders = [
+  {
+    name: "Aaron Larsen",
+    role: "leads scientific direction and execution quality.",
+    img: "/assets/03b1b2aaad1df3835db12d2cb4c7e2cf4315e000.png",
+  },
+  {
+    name: "Joel Deutsch",
+    role: "Leads operations, infrastructure, and delivery reliability.",
+    img: "/assets/03b1b2aaad1df3835db12d2cb4c7e2cf4315e000.png",
+  },
+];
+
+export function Leadership() {
+  return (
+    <section className="bg-white w-full py-16 md:py-20 overflow-hidden px-6 md:px-10 lg:px-16 relative z-10">
+      <div className="w-full max-w-[1600px] flex flex-col gap-6 md:gap-10">
+        {/* Section header */}
+        <div className="flex flex-col gap-2">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-medium text-black">
+            Leadership
+          </h2>
+          <p className="text-base md:text-lg font-normal text-black">
+            Scientific standards and operational discipline â€” owned at the top.
+          </p>
+        </div>
+
+        {/* Leader cards */}
+        <div className="flex flex-col md:flex-row gap-8 md:gap-12 w-full">
+          {leaders.map((leader, i) => (
+            <div key={i} className="flex flex-col gap-4 flex-1">
+              {/* Photo */}
+              <div className="relative w-full max-w-[435px] aspect-[435/317] rounded-[28px] overflow-hidden bg-gray-100">
+                <Image
+                  src={leader.img}
+                  alt={leader.name}
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-black/[0.03] rounded-[28px]" />
+              </div>
+
+              {/* Name pill + description */}
+              <div className="bg-[#f7f6f7] rounded-full flex items-center gap-3 px-2 py-2 w-full">
+                <span className="bg-[#d3b582] text-black rounded-full px-4 py-2 text-base font-normal whitespace-nowrap backdrop-blur-md shrink-0">
+                  {leader.name}
+                </span>
+                <p className="text-[#5e5e5e] font-normal text-sm md:text-base leading-snug flex-1">
+                  {leader.role}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+

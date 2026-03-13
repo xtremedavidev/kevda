@@ -1,0 +1,288 @@
+"use client";
+import React from "react";
+import Image from "next/image";
+import { ArrowDown, Zap, LucideProps } from "lucide-react";
+import { UnifiedCTA } from "@/components/sections/UnifiedCTA";
+import { SideNavItem } from "@/components/sections/SideNav";
+import { PageWrapper } from "@/components/layout/PageWrapper";
+
+interface WorkflowStep {
+  title: string;
+  icon: React.ComponentType<LucideProps>;
+  desc?: string;
+}
+
+interface CapabilityItem {
+  text: string;
+}
+
+interface OutputCard {
+  title: string;
+  color: string;
+  type?: "chart" | "table" | "trace" | "note" | "blot" | "image" | "checklist" | "location" | "lines";
+  tag?: string;
+  highlight?: boolean;
+}
+
+const MockLines = ({ count = 3 }: { count?: number }) => (
+  <div className="flex flex-col gap-1.5 mt-1">
+    {[...Array(count)].map((_, i) => (
+      <div 
+        key={i} 
+        className={`h-1.5 rounded-full bg-[#E4E4DC] ${i === 0 ? 'w-full' : i === 1 ? 'w-[72%]' : 'w-[48%]'}`} 
+      />
+    ))}
+  </div>
+);
+
+const MockGrid = ({ tealRows = 2, totalRows = 4 }: { tealRows?: number, totalRows?: number }) => (
+  <div className="grid grid-cols-2 gap-1 mt-1">
+    {[...Array(totalRows)].map((_, i) => (
+      <div 
+        key={i} 
+        className={`h-4 rounded-sm ${i < tealRows ? 'bg-[#EBF4F2] border border-[#C8DDD9]' : 'bg-[#E4E4DC]'}`} 
+      />
+    ))}
+  </div>
+);
+
+const CurveBox = ({ type = "ic50" }: { type?: "ic50" | "dls" }) => (
+  <svg className="w-full h-12 mt-1" viewBox="0 0 236 46" fill="none">
+    <line x1="0" y1="42" x2="236" y2="42" stroke="#E2E2D8" strokeWidth="0.5"/>
+    <line x1="0" y1="0" x2="0" y2="42" stroke="#E2E2D8" strokeWidth="0.5"/>
+    {type === "ic50" ? (
+      <>
+        <path d="M0 41 C20 41 40 40 60 36 C80 30 90 16 110 8 C130 2 148 3 170 5 C192 7 210 7 236 7" stroke="#D4B57C" strokeWidth="1.8" fill="none"/>
+        <path d="M0 41 C20 41 40 40 60 36 C80 30 90 16 110 8 C130 2 148 3 170 5 C192 7 210 7 236 7 L236 42 L0 42Z" fill="#D4B57C" fillOpacity="0.08"/>
+      </>
+    ) : (
+      <>
+        <path d="M0 41 C40 41 70 41 100 18 C118 4 118 4 136 18 C166 41 196 41 236 41" stroke="#D4B57C" strokeWidth="1.8" fill="none"/>
+        <path d="M0 41 C40 41 70 41 100 18 C118 4 118 4 136 18 C166 41 196 41 236 41 L236 42 L0 42Z" fill="#D4B57C" fillOpacity="0.1"/>
+      </>
+    )}
+  </svg>
+);
+
+const TraceBox = () => (
+  <svg className="w-full h-12 mt-1" viewBox="0 0 236 46" fill="none">
+    <line x1="0" y1="42" x2="236" y2="42" stroke="#E2E2D8" strokeWidth="0.5"/>
+    <path d="M0 40 L28 40 L42 8 L56 40 L96 40 L112 4 L128 40 L195 40 L210 14 L224 40 L236 40" stroke="#004D43" strokeWidth="1.4" fill="none"/>
+  </svg>
+);
+
+const BlotBars = () => (
+  <div className="flex items-end gap-1.5 h-10 mt-1">
+    {[
+      { h: "90%", o: 0.85 },
+      { h: "28%", o: 0.25 },
+      { h: "75%", o: 0.65 },
+      { h: "16%", o: 0.20 },
+      { h: "55%", o: 0.45 },
+      { h: "10%", o: 0.15 }
+    ].map((b, i) => (
+      <div 
+        key={i} 
+        style={{ height: b.h, backgroundColor: `rgba(212,181,124,${b.o})` }}
+        className="flex-1 rounded-t-sm"
+      />
+    ))}
+  </div>
+);
+
+const ChecklistMock = () => (
+  <div className="flex flex-col gap-2 mt-1">
+    {[80, 100, 60].map((w, i) => (
+      <div key={i} className="flex items-center gap-2">
+        <div className="w-2.5 h-2.5 border border-[#004D43] rounded-[2px] shrink-0" />
+        <div className="h-1.5 rounded-full bg-[#E4E4DC] flex-1" style={{ width: `${w}%` }} />
+      </div>
+    ))}
+  </div>
+);
+
+const LocationMock = ({ city }: { city: string }) => (
+  <div className="flex flex-col gap-2 mt-1">
+    <div className="flex items-center gap-2">
+      <div className="w-2 h-2 rounded-full bg-[#004D43]" />
+      <span className="text-[10px] font-medium text-black">{city}</span>
+    </div>
+    <div className="h-1 rounded-full bg-[#E4E4DC] w-[72%]" />
+    <div className="h-1 rounded-full bg-[#E4E4DC] w-[48%]" />
+  </div>
+);
+
+interface CapabilityProps {
+  title: string;
+  subtitle: string;
+  heroImage?: string;
+  workflowSteps: WorkflowStep[];
+  capabilities: CapabilityItem[];
+  outputPoints: string[];
+  outputCards: OutputCard[];
+  sideNavItems: SideNavItem[];
+}
+
+export const CapabilityTemplate: React.FC<CapabilityProps> = ({
+  title,
+  subtitle,
+  heroImage = "/assets/008d4cd5bfb647abbdba3681ada3b89d350124b8.png",
+  workflowSteps,
+  capabilities,
+  outputPoints,
+  outputCards,
+  sideNavItems,
+}) => {
+  return (
+    <PageWrapper sideNavItems={sideNavItems}>
+      {/* Hero Section - Standardized to Homepage Style */}
+      <section id={sideNavItems[0]?.sectionId} className="relative w-full min-h-screen flex items-center pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
+        <div className="absolute inset-0 pointer-events-none opacity-60 overflow-hidden">
+          <Image
+            src={heroImage}
+            alt="Hero Visual"
+            fill
+            className="object-cover object-left bg-white"
+            priority
+          />
+        </div>
+
+        <div className="relative z-10 w-full max-w-3xl flex flex-col gap-8 md:gap-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-black leading-[1.1] wrap-break-word">
+            {title}
+          </h1>
+
+          <p className="text-lg md:text-xl font-normal text-black w-full max-w-2xl">
+            {subtitle}
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4">
+            <button className="bg-[#d3b582] text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
+              Start a Confidential Discussion
+            </button>
+            <button className="bg-[#084d43] text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
+              Initiate a Project
+            </button>
+          </div>
+          <div className="flex items-center gap-2 mt-2">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#d3b582] opacity-50"></div>
+            <span className="text-xs text-gray-400 font-medium">NDA available upon request</span>
+          </div>
+        </div>
+
+        <div className="hidden lg:flex absolute bottom-12 right-[10%] items-center gap-2 text-[#8b8b8b]">
+          <ArrowDown size={24} className="stroke-[1.5px]" />
+          <span className="font-light text-base">Scroll for more</span>
+        </div>
+      </section>
+
+      {/* Capabilities Section */}
+      <section id={sideNavItems[1]?.sectionId} className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
+        <div className="w-full max-w-[1600px] flex flex-col pt-12">
+          <div className="w-full mb-16">
+            <h2 className="text-4xl md:text-5xl font-medium text-black">Capabilities</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl mx-auto">
+            {capabilities.map((item, i) => (
+              <div 
+                key={i} 
+                className={`rounded-[30px] p-8 md:p-12 flex items-center justify-center text-center group transition-transform hover:scale-[1.02] ${
+                   i % 4 === 0 || i % 4 === 3 ? "bg-[#eef2f2]" : "bg-[#f5efe4]"
+                }`}
+              >
+                <p className="text-xl md:text-2xl font-medium text-black leading-snug">
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Workflow Section */}
+      <section id={sideNavItems[2]?.sectionId} className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
+         <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-4 w-full max-w-7xl mx-auto">
+            {workflowSteps.map((step, i) => (
+              <React.Fragment key={i}>
+                <div className="flex flex-col items-center flex-1 max-w-[280px]">
+                   <div className="bg-[#f7f7f7] rounded-3xl p-6 md:p-10 flex flex-col items-center gap-8 w-full relative group">
+                      <div className="relative w-24 h-24 overflow-hidden rounded-full bg-white flex items-center justify-center transform group-hover:scale-110 transition-transform shadow-sm">
+                         <step.icon size={48} strokeWidth={1.5} className="text-[#084d43]" />
+                      </div>
+                      <div className="bg-white/90 px-6 py-3 rounded-xl text-2xl font-medium text-black text-center shadow-sm relative z-10 w-full">
+                        {step.title}
+                      </div>
+                      {step.desc && <p className="text-center text-[#242424] font-normal leading-relaxed">{step.desc}</p>}
+                   </div>
+                </div>
+                
+                {/* connectors */}
+                {i < workflowSteps.length - 1 && (
+                   <div className="hidden lg:flex items-center gap-2 mx-[-8px] z-20">
+                      <div className="w-1.5 h-1.5 rounded-full border border-gray-400"></div>
+                      <div className="w-12 lg:w-16 border-t border-dashed border-gray-400 mx-1"></div>
+                      <div className="w-1.5 h-1.5 rounded-full border border-gray-400"></div>
+                   </div>
+                )}
+              </React.Fragment>
+            ))}
+         </div>
+      </section>
+
+      {/* Outputs / Notes Section */}
+      <section id={sideNavItems[3]?.sectionId} className="bg-white w-full py-20 px-6 md:px-10 lg:px-16 relative z-10">
+        <div className="w-full max-w-[1400px] border border-gray-100 rounded-[40px] overflow-hidden bg-white shadow-sm mx-auto">
+           <div className="px-10 py-6 border-b border-gray-100">
+              <h2 className="text-2xl font-medium text-gray-800">Outputs/Notes</h2>
+              <p className="text-sm text-gray-400">Here&apos;s a preview of what exactly you will receive</p>
+           </div>
+           
+           <div className="p-8 lg:p-12 flex flex-col lg:flex-row gap-12">
+              {/* Left Content List */}
+              <div className="flex-1 bg-[#dbe4e4] rounded-[32px] p-8 lg:p-12 relative flex flex-col gap-4">
+                 <div className="absolute top-4 right-4 text-[#8a9b9b]">
+                    <Zap size={20} />
+                 </div>
+                 {outputPoints.map((point, i) => (
+                   <div key={i} className="bg-white rounded-2xl px-6 py-4 flex items-center gap-4 shadow-sm">
+                      <Zap size={18} className="text-[#a0c5c1]" />
+                      <span className="text-lg text-gray-600">{point}</span>
+                   </div>
+                 ))}
+              </div>
+
+              {/* Right Output Cards */}
+              <div className="w-full lg:w-[400px] flex flex-col gap-6">
+                 {outputCards.map((card, i) => (
+                   <div key={i} className={`border border-gray-100 rounded-[24px] overflow-hidden bg-[#fafaf6] shadow-sm ${card.highlight ? 'border-t-[2.5px] border-t-[#d4b57c]' : ''}`}>
+                      <div 
+                        className="px-6 py-3 flex items-center justify-between border-b border-gray-100"
+                        style={{ backgroundColor: card.color || '#ffffff' }}
+                      >
+                         <span className="text-[11px] font-medium text-gray-700 tracking-tight">{card.title}</span>
+                         {card.tag && <span className="text-[9px] font-bold text-gray-400 tracking-wider uppercase">{card.tag}</span>}
+                      </div>
+                      <div className="p-6">
+                         {card.type === "table" && <MockGrid />}
+                         {card.type === "chart" && <CurveBox />}
+                         {card.type === "trace" && <TraceBox />}
+                         {card.type === "blot" && <BlotBars />}
+                         {card.type === "image" && <MockGrid tealRows={4} totalRows={2} />}
+                         {card.type === "checklist" && <ChecklistMock />}
+                         {card.type === "location" && <LocationMock city={card.title} />}
+                         {(card.type === "lines" || !card.type) && <MockLines />}
+                      </div>
+                   </div>
+                 ))}
+              </div>
+           </div>
+        </div>
+      </section>
+
+      <div id={sideNavItems[sideNavItems.length - 1]?.sectionId}>
+         <UnifiedCTA />
+      </div>
+    </PageWrapper>
+  );
+};
