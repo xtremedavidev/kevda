@@ -1,38 +1,71 @@
-"use client";
-import React from "react";
-import Image from "next/image";
+import React, { Suspense } from "react";
+import Spline from "@splinetool/react-spline";
 import { ArrowDown } from "lucide-react";
-
+import { motion } from "motion/react";
 export function Hero() {
   return (
-    <section className="relative w-full min-h-screen flex items-center pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
-      {/* Background Graphic */}
-      <div className="absolute inset-0 pointer-events-none opacity-60 overflow-hidden">
-        <Image src="/assets/008d4cd5bfb647abbdba3681ada3b89d350124b8.png" alt="DNA Background" fill className="object-cover object-left bg-white" priority />
-      </div>
-
-      <div className="relative z-10 w-full max-w-3xl flex flex-col gap-8 md:gap-4">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl leading-[1.1] font-medium text-black break-words">
+    <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} className="relative w-full min-h-screen flex flex-col md:flex-row md:items-center pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 w-full max-w-3xl flex flex-col gap-8 md:gap-4 mt-24 md:mt-0 order-1"
+      >
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+          className="text-3xl sm:text-4xl lg:text-5xl leading-[1.1] font-medium text-black break-words"
+        >
           Integrated mRNA Development.<br/>
           Built for Preclinical Execution.
-        </h1>
+        </motion.h1>
         
-        <p className="text-lg md:text-xl font-normal text-black w-full max-w-2xl">
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="text-lg md:text-xl font-normal text-black w-full max-w-2xl"
+        >
           Kevda Bioworks is a premium wet-lab CRO supporting biotech and biopharma teams across molecular biology, cell-based assays, protein characterization, and mRNA/LNP delivery.
-        </p>
+        </motion.p>
 
-        <p className="text-lg md:text-xl font-normal text-black w-full max-w-2xl whitespace-pre-wrap">
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          className="text-lg md:text-xl font-normal text-black w-full max-w-2xl whitespace-pre-wrap"
+        >
           {`Boston, MA     |     Bangalore, India`}
-        </p>
+        </motion.p>
 
-        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4"
+        >
           <button className="bg-[#d3b582] text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
             Start a Confidential Discussion
           </button>
           <button className="bg-[#084d43] text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
             Explore Capabilities
           </button>
-        </div>
+        </motion.div>
+      </motion.div>
+
+      {/* Background Graphic */}
+      <div className="relative md:absolute md:inset-0 pointer-events-none opacity-80 overflow-hidden w-full h-[400px] md:h-full order-2 md:order-0 mt-12 md:mt-0">
+        <Suspense fallback={<div className="w-full h-full bg-white" />}>
+          <Spline 
+            scene="/spline/home.splinecode" 
+            className="w-full h-full object-cover md:pl-160 md:scale-130"
+          />
+        </Suspense>
       </div>
 
       {/* Scroll indicator */}
@@ -40,7 +73,7 @@ export function Hero() {
         <ArrowDown size={24} className="stroke-[1.5px]" />
         <span className="font-light text-base">Scroll for more</span>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

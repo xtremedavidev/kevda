@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { CapabilityTemplate } from "@/components/sections/CapabilityTemplate";
-import { Edit3, Puzzle, Maximize, Target, Package } from "lucide-react";
 
 export default function Frame15() {
   const sideNavItems = [
@@ -20,11 +19,11 @@ export default function Frame15() {
   ];
 
   const workflowSteps = [
-    { title: "Design", icon: Edit3 },
-    { title: "Assembly", icon: Puzzle },
-    { title: "Expansion", icon: Maximize },
-    { title: "Validation", icon: Target },
-    { title: "Handoff", icon: Package },
+    { title: "Design", icon: "/imgs/molecular biology/icons/design.png" },
+    { title: "Assembly", icon: "/imgs/molecular biology/icons/assembly.png" },
+    { title: "Expansion", icon: "/imgs/molecular biology/icons/Expansion.png" },
+    { title: "Validation", icon: "/imgs/molecular biology/icons/validation.png" },
+    { title: "Handoff", icon: "/imgs/molecular biology/icons/handoff.png" },
   ];
 
   const outputPoints = [
@@ -44,6 +43,7 @@ export default function Frame15() {
       title="Molecular Biology & Vector Engineering"
       subtitle="Foundational build work for discovery and genetic medicine — executed with tight controls, verified validation, and downstream-ready documentation."
       heroImage="/assets/fdbad05637fd6c756813f49888b2a9121970e37b.png"
+      splineScene="/spline/molecular.splinecode"
       capabilities={capabilities}
       workflowSteps={workflowSteps}
       outputPoints={outputPoints}

@@ -1,6 +1,7 @@
 ﻿"use client";
 import React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 
 export function Workflow3() {
   const steps = [
@@ -12,7 +13,11 @@ export function Workflow3() {
   ];
 
   return (
-    <section className="bg-white w-full py-16 px-6 md:px-10 lg:px-16 relative z-10 overflow-hidden">
+    <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} className="bg-white w-full py-16 px-6 md:px-10 lg:px-16 relative z-10 overflow-hidden">
        <div className="w-full max-w-[1600px] flex flex-col md:flex-row items-center justify-start gap-4 lg:gap-8">
           {steps.map((step, i) => (
              <React.Fragment key={step.title}>
@@ -32,7 +37,7 @@ export function Workflow3() {
              </React.Fragment>
           ))}
        </div>
-    </section>
+    </motion.section>
   );
 }
 

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { CapabilityTemplate } from "@/components/sections/CapabilityTemplate";
-import { MessageSquare, Sliders, FileText, TrendingUp, FileCheck } from "lucide-react";
 
 export default function FrameCell() {
   const sideNavItems = [
@@ -20,11 +19,11 @@ export default function FrameCell() {
   ];
 
   const workflowSteps = [
-    { title: "Input", icon: MessageSquare },
-    { title: "Controls", icon: Sliders },
-    { title: "Readouts", icon: FileText },
-    { title: "IC50 Curve", icon: TrendingUp },
-    { title: "Decision Note", icon: FileCheck },
+    { title: "Input", icon: "/imgs/cell engineering/input.png" },
+    { title: "Controls", icon: "/imgs/cell engineering/controls.png" },
+    { title: "Readouts", icon: "/imgs/cell engineering/readouts.png" },
+    { title: "IC50 Curve", icon: "/imgs/cell engineering/ic50.png" },
+    { title: "Decision Note", icon: "/imgs/cell engineering/decision.png" },
   ];
 
   const outputPoints = [
@@ -44,6 +43,7 @@ export default function FrameCell() {
       title="Cell Engineering & Functional Analysis"
       subtitle="Functional workflows to confirm activity and support decisions — delivered with disciplined execution and interpretation-ready reporting."
       heroImage="/assets/fdbad05637fd6c756813f49888b2a9121970e37b.png"
+      splineScene="/spline/cell.splinecode"
       capabilities={capabilities}
       workflowSteps={workflowSteps}
       outputPoints={outputPoints}

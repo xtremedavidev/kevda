@@ -1,5 +1,5 @@
-"use client";
-import React from "react";
+import React, { Suspense } from "react";
+import Spline from "@splinetool/react-spline";
 import Image from "next/image";
 import { ArrowDown, Zap, LucideProps } from "lucide-react";
 import { UnifiedCTA } from "@/components/sections/UnifiedCTA";
@@ -8,12 +8,13 @@ import { PageWrapper } from "@/components/layout/PageWrapper";
 
 interface WorkflowStep {
   title: string;
-  icon: React.ComponentType<LucideProps>;
+  icon: React.ComponentType<LucideProps> | string;
   desc?: string;
 }
 
 interface CapabilityItem {
   text: string;
+  icon?: React.ComponentType<LucideProps> | string;
 }
 
 interface OutputCard {
@@ -116,122 +117,207 @@ interface CapabilityProps {
   title: string;
   subtitle: string;
   heroImage?: string;
-  workflowSteps: WorkflowStep[];
+  splineScene?: string;
+  workflowSteps?: WorkflowStep[];
   capabilities: CapabilityItem[];
   outputPoints: string[];
   outputCards: OutputCard[];
   sideNavItems: SideNavItem[];
+  secondaryButtonText?: string;
 }
+
+import { motion } from "motion/react";
 
 export const CapabilityTemplate: React.FC<CapabilityProps> = ({
   title,
   subtitle,
   heroImage = "/assets/008d4cd5bfb647abbdba3681ada3b89d350124b8.png",
+  splineScene,
   workflowSteps,
   capabilities,
   outputPoints,
   outputCards,
   sideNavItems,
+  secondaryButtonText = "Initiate a Project",
 }) => {
   return (
     <PageWrapper sideNavItems={sideNavItems}>
       {/* Hero Section - Standardized to Homepage Style */}
-      <section id={sideNavItems[0]?.sectionId} className="relative w-full min-h-screen flex items-center pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
-        <div className="absolute inset-0 pointer-events-none opacity-60 overflow-hidden">
-          <Image
-            src={heroImage}
-            alt="Hero Visual"
-            fill
-            className="object-cover object-left bg-white"
-            priority
-          />
-        </div>
-
-        <div className="relative z-10 w-full max-w-3xl flex flex-col gap-8 md:gap-4">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-black leading-[1.1] wrap-break-word">
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id={sideNavItems[0]?.sectionId} className="relative w-full min-h-screen flex flex-col md:flex-row md:items-center pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative z-10 w-full max-w-3xl flex flex-col gap-8 md:gap-4 mt-24 md:mt-0 order-1"
+        >
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-medium text-black leading-[1.1] wrap-break-word"
+          >
             {title}
-          </h1>
+          </motion.h1>
 
-          <p className="text-lg md:text-xl font-normal text-black w-full max-w-2xl">
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="text-lg md:text-xl font-normal text-black w-full max-w-2xl"
+          >
             {subtitle}
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4"
+          >
             <button className="bg-[#d3b582] text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
               Start a Confidential Discussion
             </button>
             <button className="bg-[#084d43] text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
-              Initiate a Project
+              {secondaryButtonText}
             </button>
-          </div>
-          <div className="flex items-center gap-2 mt-2">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="flex items-center gap-2 mt-2"
+          >
             <div className="w-2.5 h-2.5 rounded-full bg-[#d3b582] opacity-50"></div>
             <span className="text-xs text-gray-400 font-medium">NDA available upon request</span>
-          </div>
+          </motion.div>
+        </motion.div>
+
+        <div className="relative md:absolute md:inset-0 pointer-events-none opacity-80 overflow-hidden bg-white w-full h-[400px] md:h-full order-2 md:order-0 mt-12 md:mt-0">
+          {splineScene ? (
+            <Suspense fallback={<div className="w-full h-full bg-white transition-opacity duration-500" />}>
+              <Spline 
+                scene={splineScene} 
+                className="w-full h-full object-cover md:pl-140 md:scale-120"
+              />
+            </Suspense>
+          ) : (
+            <Image
+              src={heroImage}
+              alt="Hero Visual"
+              fill
+              className="object-cover object-left bg-white"
+              priority
+            />
+          )}
         </div>
 
         <div className="hidden lg:flex absolute bottom-12 right-[10%] items-center gap-2 text-[#8b8b8b]">
           <ArrowDown size={24} className="stroke-[1.5px]" />
           <span className="font-light text-base">Scroll for more</span>
         </div>
-      </section>
+      </motion.section>
 
       {/* Capabilities Section */}
-      <section id={sideNavItems[1]?.sectionId} className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
-        <div className="w-full max-w-[1600px] flex flex-col pt-12">
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id={sideNavItems[1]?.sectionId} className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
+        <div className="w-full max-w-[1600px] flex flex-col pt-12 mx-auto">
           <div className="w-full mb-16">
             <h2 className="text-4xl md:text-5xl font-medium text-black">Capabilities</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-5xl mx-auto">
+          <div className={`grid grid-cols-1 ${capabilities.some(c => c.icon) ? 'md:grid-cols-3' : 'md:grid-cols-2'} gap-6 w-full max-w-5xl mx-auto`}>
             {capabilities.map((item, i) => (
               <div 
                 key={i} 
-                className={`rounded-[30px] p-8 md:p-12 flex items-center justify-center text-center group transition-transform hover:scale-[1.02] ${
-                   i % 4 === 0 || i % 4 === 3 ? "bg-[#eef2f2]" : "bg-[#f5efe4]"
+                className={`rounded-[30px] p-8 md:p-12 flex flex-col items-center justify-center text-center group transition-transform hover:scale-[1.02] ${
+                   capabilities.some(c => c.icon) ? "bg-[#f6f6f6]" : (i % 4 === 0 || i % 4 === 3 ? "bg-[#eef2f2]" : "bg-[#f5efe4]")
                 }`}
               >
-                <p className="text-xl md:text-2xl font-medium text-black leading-snug">
+                {item.icon && (
+                  <div className="mb-6 flex justify-center w-full">
+                     {typeof item.icon === 'string' ? (
+                       <div className="relative w-28 h-28">
+                         <Image src={item.icon} alt={item.text} fill className="object-contain" />
+                       </div>
+                     ) : (
+                       <div className="text-[#9a9a9a]">
+                         <item.icon size={64} strokeWidth={1} />
+                       </div>
+                     )}
+                  </div>
+                )}
+                <p className={`font-medium text-black leading-snug ${item.icon ? 'text-sm md:text-base' : 'text-xl md:text-2xl'}`}>
                   {item.text}
                 </p>
               </div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Workflow Section */}
-      <section id={sideNavItems[2]?.sectionId} className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
-         <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-4 w-full max-w-7xl mx-auto">
-            {workflowSteps.map((step, i) => (
-              <React.Fragment key={i}>
-                <div className="flex flex-col items-center flex-1 max-w-[280px]">
-                   <div className="bg-[#f7f7f7] rounded-3xl p-6 md:p-10 flex flex-col items-center gap-8 w-full relative group">
-                      <div className="relative w-24 h-24 overflow-hidden rounded-full bg-white flex items-center justify-center transform group-hover:scale-110 transition-transform shadow-sm">
-                         <step.icon size={48} strokeWidth={1.5} className="text-[#084d43]" />
+      {workflowSteps && workflowSteps.length > 0 && (
+        <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id={sideNavItems[2]?.sectionId} className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
+           <div className="flex flex-col md:flex-row items-center justify-center w-full gap-8 md:gap-0 max-w-[1600px] mx-auto">
+              {workflowSteps.map((step, i) => (
+                <React.Fragment key={i}>
+                  <div className="flex flex-col items-center flex-1 w-full max-w-[280px]">
+                     <div className="bg-[#f7f7f7] rounded-3xl p-6 md:p-7 flex flex-col items-center gap-6 w-full relative group hover:shadow-xl transition-all">
+                        <div className="relative w-22 h-22 md:w-26 md:h-26 flex items-center justify-center transform group-hover:scale-105 transition-transform">
+                         {typeof step.icon === 'string' ? (
+                           <div className="relative w-full h-full">
+                             <Image src={step.icon} alt={step.title} fill className="object-contain" />
+                           </div>
+                         ) : (
+                           <step.icon size={44} strokeWidth={1} className="text-[#084d43]" />
+                         )}
                       </div>
-                      <div className="bg-white/90 px-6 py-3 rounded-xl text-2xl font-medium text-black text-center shadow-sm relative z-10 w-full">
-                        {step.title}
-                      </div>
-                      {step.desc && <p className="text-center text-[#242424] font-normal leading-relaxed">{step.desc}</p>}
-                   </div>
-                </div>
-                
-                {/* connectors */}
-                {i < workflowSteps.length - 1 && (
-                   <div className="hidden lg:flex items-center gap-2 mx-[-8px] z-20">
-                      <div className="w-1.5 h-1.5 rounded-full border border-gray-400"></div>
-                      <div className="w-12 lg:w-16 border-t border-dashed border-gray-400 mx-1"></div>
-                      <div className="w-1.5 h-1.5 rounded-full border border-gray-400"></div>
-                   </div>
-                )}
-              </React.Fragment>
-            ))}
-         </div>
-      </section>
+                        <div className="bg-white px-8 py-3 rounded-xl text-xl md:text-2xl font-medium text-black text-center shadow-sm relative z-10 w-full">
+                          {step.title}
+                        </div>
+                        {step.desc && <p className="text-center text-black/60 font-normal leading-tight">{step.desc}</p>}
+                     </div>
+                  </div>
+                  
+                  {/* Horizontal dashed connector with circles */}
+                  {i < workflowSteps.length - 1 && (
+                    <div className="hidden md:flex items-center justify-center grow max-w-[100px]">
+                       <div className="relative flex items-center w-full h-16">
+                          <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-300 bg-white absolute left-0 z-10" style={{ bottom: i % 2 === 0 ? '0' : 'auto', top: i % 2 === 0 ? 'auto' : '0' }} />
+                          <svg className="w-full h-full absolute inset-0 py-1" preserveAspectRatio="none" viewBox="0 0 100 100">
+                            {i % 2 === 0 ? (
+                              <path d="M 0 100 L 40 100 Q 50 100 50 90 L 50 10 Q 50 0 60 0 L 100 0" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 1" vectorEffect="non-scaling-stroke" />
+                            ) : (
+                              <path d="M 0 0 L 40 0 Q 50 0 50 10 L 50 90 Q 50 100 60 100 L 100 100" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 1" vectorEffect="non-scaling-stroke" />
+                            )}
+                          </svg>
+                          <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-300 bg-white absolute right-0 z-10" style={{ top: i % 2 === 0 ? '0' : 'auto', bottom: i % 2 === 0 ? 'auto' : '0' }} />
+                       </div>
+                    </div>
+                  )}
+                </React.Fragment>
+              ))}
+           </div>
+        </motion.section>
+      )}
 
       {/* Outputs / Notes Section */}
-      <section id={sideNavItems[3]?.sectionId} className="bg-white w-full py-20 px-6 md:px-10 lg:px-16 relative z-10">
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id={sideNavItems[3]?.sectionId} className="bg-white w-full py-20 px-6 md:px-10 lg:px-16 relative z-10">
         <div className="w-full max-w-[1400px] border border-gray-100 rounded-[40px] overflow-hidden bg-white shadow-sm mx-auto">
            <div className="px-10 py-6 border-b border-gray-100">
               <h2 className="text-2xl font-medium text-gray-800">Outputs/Notes</h2>
@@ -278,7 +364,7 @@ export const CapabilityTemplate: React.FC<CapabilityProps> = ({
               </div>
            </div>
         </div>
-      </section>
+      </motion.section>
 
       <div id={sideNavItems[sideNavItems.length - 1]?.sectionId}>
          <UnifiedCTA />

@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { CapabilityTemplate } from "@/components/sections/CapabilityTemplate";
-import { Beaker, Share2, BarChart3, TrendingUp, Layers } from "lucide-react";
 
 export default function FrameRNA() {
   const sideNavItems = [
@@ -20,11 +19,11 @@ export default function FrameRNA() {
   ];
 
   const workflowSteps = [
-    { title: "IVT", icon: Beaker },
-    { title: "LNP", icon: Share2 },
-    { title: "Integrity", icon: BarChart3 },
-    { title: "Sizing", icon: TrendingUp },
-    { title: "Data Package", icon: Layers },
+    { title: "IVT", icon: "/imgs/specialized rna/ivt.png" },
+    { title: "LNP", icon: "/imgs/specialized rna/lnp.png" },
+    { title: "Integrity", icon: "/imgs/specialized rna/integrity.png" },
+    { title: "Sizing", icon: "/imgs/specialized rna/sizing.png" },
+    { title: "Data Package", icon: "/imgs/specialized rna/data.png" },
   ];
 
   const outputPoints = [
@@ -43,6 +42,7 @@ export default function FrameRNA() {
       title="Specialized RNA & Advanced Delivery"
       subtitle="Synthetic RNA and delivery execution for preclinical cycles — disciplined workflows, advanced analytics, and documentation built for review and diligence."
       heroImage="/assets/fdbad05637fd6c756813f49888b2a9121970e37b.png"
+      splineScene="/spline/specialized.splinecode"
       capabilities={capabilities}
       workflowSteps={workflowSteps}
       outputPoints={outputPoints}

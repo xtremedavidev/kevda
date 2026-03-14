@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { ArrowDown, Zap, Ruler, MessageSquare, User, Layers } from "lucide-react";
+import { Zap, LucideProps } from "lucide-react";
 import { UnifiedCTA } from "@/components/sections/UnifiedCTA";
 import { PageWrapper } from "@/components/layout/PageWrapper";
+import { motion } from "motion/react";
 
 export default function FrameCareers() {
   const sideNavItems = [
@@ -13,27 +14,21 @@ export default function FrameCareers() {
     { label: "Contact", sectionId: "careers-contact" },
   ];
 
-  const pillars = [
-    { title: "Rigor and reproducibility", icon: Ruler },
-    { title: "Clear communication", icon: MessageSquare },
-    { title: "Ownership and accountability", icon: User },
-    { title: "Process discipline and continuous improvement", icon: Layers },
+  const pillars: { title: string; icon: string | React.ComponentType<LucideProps> }[] = [
+    { title: "Rigor and reproducibility", icon: "/imgs/careers/Rigor.png" },
+    { title: "Clear communication", icon: "/imgs/careers/communication.png" },
+    { title: "Ownership and accountability", icon: "/imgs/careers/Ownership.png" },
+    { title: "Process discipline and continuous improvement", icon: "/imgs/careers/Process.png" },
   ];
 
   return (
     <PageWrapper sideNavItems={sideNavItems}>
       {/* Hero Section - Matching Homepage Style */}
-      <section id="careers-hero" className="relative w-full min-h-screen flex items-center pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
-        <div className="absolute inset-0 pointer-events-none opacity-60 overflow-hidden">
-          <Image 
-            src="/assets/008d4cd5bfb647abbdba3681ada3b89d350124b8.png" 
-            alt="DNA Background" 
-            fill 
-            className="object-cover object-left bg-white" 
-            priority 
-          />
-        </div>
-
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id="careers-hero" className="relative w-full pt-32 md:pt-48 pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
         <div className="relative z-10 w-full max-w-3xl flex flex-col gap-8 md:gap-4">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl leading-[1.1] font-medium text-black wrap-break-word">
             Careers
@@ -49,15 +44,14 @@ export default function FrameCareers() {
             </button>
           </div>
         </div>
-
-        <div className="hidden lg:flex absolute bottom-12 right-[10%] items-center gap-2 text-[#8b8b8b]">
-          <ArrowDown size={24} className="stroke-[1.5px]" />
-          <span className="font-light text-base">Scroll for more</span>
-        </div>
-      </section>
+      </motion.section>
 
       {/* Pillars Section */}
-      <section id="careers-culture" className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id="careers-culture" className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
         <div className="w-full max-w-[1600px] flex flex-col items-center">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-6xl mx-auto">
             {pillars.map((pillar, i) => (
@@ -65,9 +59,15 @@ export default function FrameCareers() {
                 key={i} 
                 className="rounded-[32px] p-12 flex flex-col items-center justify-center text-center gap-6 bg-[#f7f7f7] border border-gray-50 group hover:shadow-xl hover:scale-[1.02] transition-all min-h-[320px]"
               >
-                <div className="text-gray-300">
-                   <pillar.icon size={64} strokeWidth={1} />
-                </div>
+                {typeof pillar.icon === 'string' ? (
+                  <div className="relative w-40 h-40 opacity-100">
+                    <Image src={pillar.icon} alt={pillar.title} fill className="object-contain" />
+                  </div>
+                ) : (
+                  <div className="text-gray-300">
+                     <pillar.icon size={64} strokeWidth={1} />
+                  </div>
+                )}
                 <h3 className="text-2xl font-bold text-black leading-snug">
                   {pillar.title}
                 </h3>
@@ -75,10 +75,14 @@ export default function FrameCareers() {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Note Section */}
-      <section id="careers-note" className="bg-white w-full py-20 px-6 md:px-10 lg:px-16 relative z-10">
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id="careers-note" className="bg-white w-full py-20 px-6 md:px-10 lg:px-16 relative z-10">
         <div className="w-full max-w-[1400px] border border-gray-100 rounded-[40px] overflow-hidden bg-white shadow-sm mx-auto">
            <div className="px-10 py-6 border-b border-gray-100">
               <h2 className="text-2xl font-medium text-gray-800">How to Apply</h2>
@@ -95,7 +99,7 @@ export default function FrameCareers() {
                </div>
             </div>
         </div>
-      </section>
+      </motion.section>
 
       <div id="careers-contact">
          <UnifiedCTA />

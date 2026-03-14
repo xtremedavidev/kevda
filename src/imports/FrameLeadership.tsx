@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { ArrowDown } from "lucide-react";
 import { UnifiedCTA } from "@/components/sections/UnifiedCTA";
 import { PageWrapper } from "@/components/layout/PageWrapper";
+import { motion } from "motion/react";
 
 export default function FrameLeadership() {
   const sideNavItems = [
@@ -30,17 +30,11 @@ export default function FrameLeadership() {
   return (
     <PageWrapper sideNavItems={sideNavItems}>
       {/* Hero Section - Matching Homepage Style */}
-      <section id="leadership-hero" className="relative w-full min-h-screen flex items-center pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
-        <div className="absolute inset-0 pointer-events-none opacity-60 overflow-hidden">
-          <Image 
-            src="/assets/008d4cd5bfb647abbdba3681ada3b89d350124b8.png" 
-            alt="DNA Background" 
-            fill 
-            className="object-cover object-left bg-white" 
-            priority 
-          />
-        </div>
-
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id="leadership-hero" className="relative w-full pt-32 md:pt-48 pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
         <div className="relative z-10 w-full max-w-3xl flex flex-col gap-8 md:gap-4">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl leading-[1.1] font-medium text-black wrap-break-word">
             Leadership
@@ -63,15 +57,14 @@ export default function FrameLeadership() {
             <span className="text-xs text-gray-400 font-medium">NDA available upon request</span>
           </div>
         </div>
-
-        <div className="hidden lg:flex absolute bottom-12 right-[10%] items-center gap-2 text-[#8b8b8b]">
-          <ArrowDown size={24} className="stroke-[1.5px]" />
-          <span className="font-light text-base">Scroll for more</span>
-        </div>
-      </section>
+      </motion.section>
 
       {/* Executives Section */}
-      <section id="leadership-team" className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id="leadership-team" className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
         <div className="w-full max-w-[1600px] flex flex-col gap-24 md:gap-32">
            {leaders.map((leader, i) => (
              <div key={i} className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 lg:gap-24 items-center`}>
@@ -95,7 +88,7 @@ export default function FrameLeadership() {
              </div>
            ))}
         </div>
-      </section>
+      </motion.section>
 
       <div id="leadership-contact">
         <UnifiedCTA />

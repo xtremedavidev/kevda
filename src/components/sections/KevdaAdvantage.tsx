@@ -1,38 +1,43 @@
-﻿"use client";
+"use client";
 import React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 
 export function KevdaAdvantage() {
   const cards = [
     {
       title: "Scientific standards",
       desc: "Shaped by leading research and platform biotech environments.",
-      bg: "bg-[#fce4c1]",
-      img: "/assets/8a5c2d67097e8722b9bd1b000d2126f3ee98fef7.png",
+      bg: "bg-[#d4c29c]",
+      img: "/imgs/index/Kevda advantage/scientific1.png",
     },
     {
       title: "Strategic efficiency",
       desc: "Extend R&D runway without compromising data integrity.",
       bg: "bg-[#d4c29c]",
-      img: "/assets/2737fabcc17e337f5b3ff5f84e620a94b1d54fcf.png",
+      img: "/imgs/index/Kevda advantage/strategic1.png",
     },
     {
       title: "QC-forward reporting",
       desc: "Structured outputs built for internal and investor review.",
-      bg: "bg-[rgba(224,203,167,0.93)]",
-      img: "/assets/2737fabcc17e337f5b3ff5f84e620a94b1d54fcf.png",
+      bg: "bg-[#d4c29c]",
+      img: "/imgs/index/Kevda advantage/qc1.png",
     },
     {
       title: "End-to-end logistics",
       desc: "Procurement through reporting managed seamlessly.",
-      bg: "bg-[rgba(224,203,167,0.93)]",
-      img: "/assets/2737fabcc17e337f5b3ff5f84e620a94b1d54fcf.png",
+      bg: "bg-[#d4c29c]",
+      img: "/imgs/index/Kevda advantage/end1.png",
     },
   ];
 
   return (
-    <section className="bg-white w-full py-16 md:py-20 overflow-hidden px-6 md:px-10 lg:px-16 relative z-10">
-      <div className="w-full max-w-[1600px]">
+    <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} className="bg-white w-full py-16 md:py-20 overflow-hidden px-6 md:px-10 lg:px-16 relative z-10">
+      <div className="w-full">
         {/* Dark wrapper */}
         <div className="bg-[#084d43] rounded-[24px] py-6 md:py-8 px-4 sm:px-8 md:px-14 flex flex-col items-start w-full relative overflow-hidden">
           {/* Title */}
@@ -49,12 +54,12 @@ export function KevdaAdvantage() {
                 key={i}
                 className={`${card.bg} rounded-xl p-5 md:p-6 flex flex-col gap-3 items-start group hover:scale-[1.01] transition-transform`}
               >
-                <div className="relative w-16 h-16 md:w-20 md:h-20 overflow-hidden rounded-lg">
+                <div className="relative w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-lg">
                   <Image
                     src={card.img}
                     alt={card.title}
                     fill
-                    className="object-cover scale-[3]"
+                    className="object-cover"
                   />
                 </div>
                 <div className="flex flex-col gap-3 leading-normal">
@@ -77,7 +82,7 @@ export function KevdaAdvantage() {
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

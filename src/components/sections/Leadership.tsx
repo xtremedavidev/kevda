@@ -1,6 +1,7 @@
 ﻿"use client";
 import React from "react";
 import Image from "next/image";
+import { motion } from "motion/react";
 
 const leaders = [
   {
@@ -17,8 +18,12 @@ const leaders = [
 
 export function Leadership() {
   return (
-    <section className="bg-white w-full py-16 md:py-20 overflow-hidden px-6 md:px-10 lg:px-16 relative z-10">
-      <div className="w-full max-w-[1600px] flex flex-col gap-6 md:gap-10">
+    <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} className="bg-white w-full py-16 md:py-20 overflow-hidden px-6 md:px-10 lg:px-16 relative z-10">
+      <div className="w-full flex flex-col gap-6 md:gap-10">
         {/* Section header */}
         <div className="flex flex-col gap-2">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-medium text-black">
@@ -57,7 +62,7 @@ export function Leadership() {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
 

@@ -2,10 +2,15 @@
 import React from "react";
 import Image from "next/image";
 import { ArrowDown } from "lucide-react";
+import { motion } from "motion/react";
 
 export function Hero3() {
   return (
-    <section className="relative w-full min-h-screen flex items-center  pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
+    <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} className="relative w-full min-h-screen flex items-center  pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
       {/* Background Graphic */}
       <div className="absolute inset-0 pointer-events-none opacity-60 overflow-hidden">
         <Image
@@ -49,6 +54,6 @@ export function Hero3() {
         <ArrowDown size={24} className="stroke-[1.5px]" />
         <span className="font-light text-base">Scroll for more</span>
       </div>
-    </section>
+    </motion.section>
   );
 }

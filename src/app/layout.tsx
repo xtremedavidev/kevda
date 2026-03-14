@@ -24,11 +24,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${spaceGrotesk.variable} antialiased font-space-grotesk`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${spaceGrotesk.variable} antialiased font-space-grotesk`} suppressHydrationWarning>
         <div className="flex flex-col min-h-screen relative">
           <Header />
-          <main className="grow w-full pt-[80px]">
+          <main className="grow w-full">
             {children}
           </main>
           <Footer />

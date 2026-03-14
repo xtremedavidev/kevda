@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
-import Image from "next/image";
-import { ArrowDown, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import { UnifiedCTA } from "@/components/sections/UnifiedCTA";
 import { PageWrapper } from "@/components/layout/PageWrapper";
+import { motion } from "motion/react";
 
 export default function FrameContact() {
   const sideNavItems = [
@@ -16,17 +16,11 @@ export default function FrameContact() {
   return (
     <PageWrapper sideNavItems={sideNavItems}>
       {/* Hero Section - Matching Homepage Style */}
-      <section id="contact-hero" className="relative w-full min-h-screen flex items-center pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
-        <div className="absolute inset-0 pointer-events-none opacity-60 overflow-hidden">
-          <Image 
-            src="/assets/008d4cd5bfb647abbdba3681ada3b89d350124b8.png" 
-            alt="DNA Background" 
-            fill 
-            className="object-cover object-left bg-white" 
-            priority 
-          />
-        </div>
-
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id="contact-hero" className="relative w-full pt-32 md:pt-48 pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
         <div className="relative z-10 w-full max-w-3xl flex flex-col gap-8 md:gap-4">
           <h1 className="text-3xl sm:text-4xl lg:text-5xl leading-[1.1] font-medium text-black wrap-break-word">
             Contact
@@ -49,15 +43,14 @@ export default function FrameContact() {
             <span className="text-xs text-gray-400 font-medium">NDA available upon request</span>
           </div>
         </div>
-
-        <div className="hidden lg:flex absolute bottom-12 right-[10%] items-center gap-2 text-[#8b8b8b]">
-          <ArrowDown size={24} className="stroke-[1.5px]" />
-          <span className="font-light text-base">Scroll for more</span>
-        </div>
-      </section>
+      </motion.section>
 
       {/* Contact Form Section */}
-      <section id="contact-form" className="bg-white w-full mt-24 py-20 px-6 md:px-10 lg:px-16 relative z-10 border border-gray-100 rounded-[40px] max-w-[1400px] mx-auto mb-32 shadow-sm">
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id="contact-form" className="bg-white w-full mt-24 py-20 px-6 md:px-10 lg:px-16 relative z-10 border border-gray-100 rounded-[40px] max-w-[1400px] mx-auto mb-32 shadow-sm">
          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <input type="text" placeholder="Name" className="bg-[#f2f2f2] rounded-xl px-8 py-4 outline-none border-none text-gray-700" />
             <input type="text" placeholder="Title" className="bg-[#f2f2f2] rounded-xl px-8 py-4 outline-none border-none text-gray-700" />
@@ -80,10 +73,14 @@ export default function FrameContact() {
          <button className="bg-[#d3b582] text-white px-12 py-4 rounded-full font-medium transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
            Start a Confidential Discussion
          </button>
-      </section>
+      </motion.section>
 
       {/* What Happens Next Section */}
-      <section id="contact-next" className="bg-white w-full py-20 px-6 md:px-10 lg:px-16 relative z-10 mx-auto max-w-[1600px]">
+      <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} id="contact-next" className="bg-white w-full py-20 px-6 md:px-10 lg:px-16 relative z-10 mx-auto max-w-[1600px]">
         <div className="w-full border border-gray-100 rounded-[40px] overflow-hidden bg-white shadow-sm">
            <div className="px-10 py-6 border-b border-gray-100">
               <h2 className="text-2xl font-medium text-gray-800">What Happens Next</h2>
@@ -132,7 +129,7 @@ export default function FrameContact() {
               </div>
            </div>
         </div>
-      </section>
+      </motion.section>
 
       <div id="contact-cta">
          <UnifiedCTA />

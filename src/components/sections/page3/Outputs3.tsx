@@ -1,6 +1,7 @@
 ﻿"use client";
 import React from "react";
 import { Zap } from "lucide-react";
+import { motion } from "motion/react";
 
 export function Outputs3() {
   const points = [
@@ -10,7 +11,11 @@ export function Outputs3() {
   ];
 
   return (
-    <section className="bg-white w-full py-16 md:py-32 px-6 md:px-10 lg:px-16 relative z-10 flex flex-col items-start">
+    <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} className="bg-white w-full py-16 md:py-32 px-6 md:px-10 lg:px-16 relative z-10 flex flex-col items-start">
        <div className="w-full max-w-[1600px] border-t border-[#ddd] pt-12 flex flex-col lg:flex-row gap-12 lg:gap-20">
           <div className="flex flex-col gap-4 w-full lg:w-1/3 text-left">
              <h2 className="text-2xl md:text-3xl font-medium text-[#666]">Outputs/Notes</h2>
@@ -53,7 +58,7 @@ export function Outputs3() {
              </div>
           </div>
        </div>
-    </section>
+    </motion.section>
   );
 }
 

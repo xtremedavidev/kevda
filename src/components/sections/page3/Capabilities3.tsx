@@ -1,9 +1,14 @@
 "use client";
 import React from "react";
+import { motion } from "motion/react";
 
 export function Capabilities3() {
   return (
-    <section className="bg-white w-full py-16 md:py-32 overflow-hidden px-6 md:px-10 lg:px-16 relative z-10">
+    <motion.section
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  transition={{ duration: 0.8, ease: "easeOut" }} className="bg-white w-full py-16 md:py-32 overflow-hidden px-6 md:px-10 lg:px-16 relative z-10">
        <div className="w-full max-w-[1600px] flex flex-col">
           <div className="mb-8 md:mb-16 w-full text-left">
              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-medium text-black break-words">Capabilities</h2>
@@ -29,7 +34,7 @@ export function Capabilities3() {
              </div>
           </div>
        </div>
-    </section>
+    </motion.section>
   );
 }
 
