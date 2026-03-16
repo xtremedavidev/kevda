@@ -32,7 +32,7 @@ export const LegalTemplate: React.FC<LegalTemplateProps> = ({ title, subtitle, s
 
         <div className="w-full max-w-[1200px] bg-[#f7f7f7] rounded-[32px] overflow-hidden border border-gray-100 shadow-sm">
           {/* Tan Header */}
-          <div className="bg-[#d3b582] px-8 md:px-12 py-6">
+          <div className="bg-[#d3b582] w-full sm:w-auto whitespace-normal sm:whitespace-nowrap px-8 md:px-12 py-6">
             <h2 className="text-2xl font-medium text-black">Sections</h2>
           </div>
 

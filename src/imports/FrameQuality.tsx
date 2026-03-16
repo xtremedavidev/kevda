@@ -32,7 +32,7 @@ export default function FrameQuality() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            className="text-4xl sm:text-5xl lg:text-[64px] leading-[1.1] font-medium text-black wrap-break-word"
+            className="text-[28px] sm:text-5xl lg:text-[64px] leading-[1.1] font-medium text-black wrap-break-word"
           >
             Quality
           </motion.h1>
@@ -52,10 +52,10 @@ export default function FrameQuality() {
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4"
           >
-            <button className="bg-[#d3b582] text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
+            <button className="bg-[#d3b582] w-full sm:w-auto whitespace-normal sm:whitespace-nowrap text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
               Start a Confidential Discussion
             </button>
-            <button className="bg-[#084d43] text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
+            <button className="bg-[#084d43] w-full sm:w-auto whitespace-normal sm:whitespace-nowrap text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
               Request a Quality Overview
             </button>
           </motion.div>
@@ -66,7 +66,7 @@ export default function FrameQuality() {
             className="flex items-center gap-2 mt-2"
           >
             <div className="w-2.5 h-2.5 rounded-full bg-[#d3b582] opacity-50"></div>
-            <span className="text-xs text-gray-400 font-medium">NDA available upon request</span>
+            <span className="text-xs text-gray-400 font-medium">NDA available upon request.</span>
           </motion.div>
         </motion.div>
 
@@ -117,7 +117,7 @@ export default function FrameQuality() {
               },
               {
                 title: "Deliver",
-                desc: "Verified data, protocols, and constructs.",
+                desc: "Clean, review-ready data packages.",
                 img: "/imgs/quality/deliver.png",
               },
             ].map((step, i) => (
@@ -143,19 +143,26 @@ export default function FrameQuality() {
 
             {/* Horizontal dashed connector with circles */}
             {i < 2 && (
-              <div className="hidden md:flex items-center justify-center grow max-w-[120px]">
-                <div className="relative flex items-center w-full h-16">
-                          <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-300 bg-white absolute left-0 z-10" style={{ bottom: i % 2 === 0 ? '0' : 'auto', top: i % 2 === 0 ? 'auto' : '0' }} />
-                          <svg className="w-full h-full absolute inset-0 py-1" preserveAspectRatio="none" viewBox="0 0 100 100">
-                            {i % 2 === 0 ? (
-                              <path d="M 0 100 L 40 100 Q 50 100 50 90 L 50 10 Q 50 0 60 0 L 100 0" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 1" vectorEffect="non-scaling-stroke" />
-                            ) : (
-                              <path d="M 0 0 L 40 0 Q 50 0 50 10 L 50 90 Q 50 100 60 100 L 100 100" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 1" vectorEffect="non-scaling-stroke" />
-                            )}
-                          </svg>
-                          <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-300 bg-white absolute right-0 z-10" style={{ top: i % 2 === 0 ? '0' : 'auto', bottom: i % 2 === 0 ? 'auto' : '0' }} />
-                       </div>
-              </div>
+              <>
+                <div className="hidden md:flex items-center justify-center grow max-w-[120px]">
+                  <div className="relative flex items-center w-full h-16">
+                            <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-300 bg-white absolute left-0 z-10" style={{ bottom: i % 2 === 0 ? '0' : 'auto', top: i % 2 === 0 ? 'auto' : '0' }} />
+                            <svg className="w-full h-full absolute inset-0 py-1" preserveAspectRatio="none" viewBox="0 0 100 100">
+                              {i % 2 === 0 ? (
+                                <path d="M 0 100 L 40 100 Q 50 100 50 90 L 50 10 Q 50 0 60 0 L 100 0" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 1" vectorEffect="non-scaling-stroke" />
+                              ) : (
+                                <path d="M 0 0 L 40 0 Q 50 0 50 10 L 50 90 Q 50 100 60 100 L 100 100" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 1" vectorEffect="non-scaling-stroke" />
+                              )}
+                            </svg>
+                            <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-300 bg-white absolute right-0 z-10" style={{ top: i % 2 === 0 ? '0' : 'auto', bottom: i % 2 === 0 ? 'auto' : '0' }} />
+                         </div>
+                </div>
+                <div className="md:hidden flex items-center justify-center py-4 text-slate-300">
+                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M12 5v14M19 12l-7 7-7-7" />
+                   </svg>
+                </div>
+              </>
             )}
               </React.Fragment>
             ))}
@@ -174,13 +181,7 @@ export default function FrameQuality() {
       >
         <div className="w-full max-w-[1600px] flex flex-col items-center">
           <div className="w-full max-w-md bg-white border border-gray-100 rounded-[32px] overflow-hidden shadow-2xl">
-            <div className="bg-[#084d43] px-10 py-3 text-center">
-              <span className="text-white text-[10px] tracking-[4px] font-bold">
-                REPORTS
-              </span>
-            </div>
             <div className="p-10 flex flex-col gap-6">
-              <h3 className="text-2xl font-bold text-black">Briefing</h3>
               <div className="flex flex-col gap-4">
                 {[
                   "Clear scope and acceptance criteria",
@@ -218,9 +219,6 @@ export default function FrameQuality() {
             <h2 className="text-2xl font-medium text-gray-800">
               Outputs/Notes
             </h2>
-            <p className="text-sm text-gray-400">
-              Here&apos;s a preview of what exactly you will receive
-            </p>
           </div>
           <div className="p-6 md:p-8 lg:p-12 flex flex-col lg:flex-row gap-8 lg:gap-12">
             <div className="flex-1 bg-[#dbe4e4] rounded-[32px] p-6 md:p-8 lg:p-12 relative flex items-start md:items-center gap-6">
@@ -230,9 +228,8 @@ export default function FrameQuality() {
               <div className="bg-white rounded-2xl p-6 flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6 shadow-sm w-full">
                 <Zap size={24} className="text-[#a0c5c1] shrink-0" />
                 <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-medium">
-                  Eligible workflows may include CoA-style summaries — residual
-                  DNA, endotoxin, and stability — aligned to scope and client
-                  requirements
+                  Eligible workflows may include CoA-style summaries such as residual
+                  DNA, endotoxin, and stability — aligned to scope and requirements.
                 </p>
               </div>
             </div>

@@ -126,7 +126,7 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 1.02 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-0 z-[80] bg-white flex flex-col md:flex-row overflow-hidden"
+      className="fixed inset-0 z-80 bg-white flex flex-col md:flex-row overflow-hidden"
     >
       {/* Left Side: Image/Visual (matching screenshot style) */}
       <motion.div 
@@ -185,7 +185,7 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
                       onClose();
                     }
                   }}
-                  className={`text-2xl md:text-4xl lg:text-5xl font-normal text-black hover:pl-4 transition-all duration-300 flex items-baseline gap-4 ${item.subItems ? 'cursor-pointer' : ''}`}
+                  className={`text-2xl md:text-4xl lg:text-5xl font-normal text-black hover:pl-4 transition-all duration-300 flex items-baseline py-2 md:py-3 gap-4 ${item.subItems ? 'cursor-pointer' : ''}`}
                 >
                   {item.label}
                   {!item.subItems && <div className="w-2 h-2 rounded-full bg-black opacity-0 group-hover:opacity-100 transition-opacity"></div>}
@@ -215,7 +215,7 @@ function MenuOverlay({ onClose }: { onClose: () => void }) {
                           key={sub.label}
                           href={sub.href}
                           onClick={onClose}
-                          className="text-lg md:text-xl text-gray-500 hover:text-black transition-colors flex items-center gap-2 py-1"
+                          className="text-lg md:text-xl text-gray-500 hover:text-black transition-colors flex items-center gap-2 py-2 md:py-3"
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
                           {sub.label}

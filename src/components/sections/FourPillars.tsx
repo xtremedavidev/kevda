@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 interface Pillar {
   id: string;
   title: string;
@@ -16,28 +17,28 @@ const pillars: Pillar[] = [
     id: "01",
     title: "Molecular Biology & Vector Engineering",
     img: "/imgs/index/pilars/molecular.png",
-    desc: "Precision cloning and vector design for therapeutic delivery",
+    desc: "Precision cloning and validated constructs built for downstream success.",
     href: "/capabilities/molecular-biology"
   },
   {
     id: "02",
-    title: "Cell Engineering & Functional Assays",
+    title: "Cell Engineering & Functional Analysis",
     img: "/imgs/index/pilars/cell.png",
-    desc: "Robust cell line development and biological characterization",
+    desc: "Structured transfection, knockdown, and IC50 workflows designed for decisions.",
     href: "/capabilities/cell-engineering"
   },
   {
     id: "03",
-    title: "Protein Characterization & Immunoanalytics",
+    title: "Protein Characterization & Immunoassays",
     img: "/imgs/index/pilars/protein.png",
     desc: "Quantitative and visual confirmation of target biology",
     href: "/capabilities/protein-characterization"
   },
   {
     id: "04",
-    title: "Advanced RNA & LNP Systems",
+    title: "Specialized RNA & Advanced Delivery",
     img: "/imgs/index/pilars/specialized.png",
-    desc: "High-performance RNA synthesis and nanoparticle formulation",
+    desc: "IVT mRNA (1–100 mg), microfluidic LNP formulation, and analytical profiling.",
     href: "/capabilities/rna-delivery"
   }
 ];
@@ -61,17 +62,24 @@ export function FourPillars() {
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.8, ease: "easeOut" }} 
       ref={targetRef} 
-      className="relative h-[600vh] bg-white"
+      className="relative md:h-[600vh] py-20 md:py-0 bg-white"
     >
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
-        <div className="w-full max-w-[1600px] mx-auto mb-8 px-6 md:px-10 lg:px-16 shrink-0">
+      <div className="md:sticky top-0 md:h-screen flex flex-col justify-center overflow-hidden">
+        <div className="w-full max-w-[1600px] mx-auto mb-12 md:mb-8 px-6 md:px-10 lg:px-16 shrink-0">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[45px] font-medium text-black">
             Four pillars. One execution system.
           </h2>
         </div>
 
         <div className="relative w-full grow flex items-center">
-          <motion.div style={{ x }} className="flex gap-12 lg:gap-24 items-center px-[calc(50vw-160px)] md:px-[calc(50vw-210px)] w-max">
+          {/* Mobile Layout */}
+          <div className="flex flex-col md:hidden gap-12 px-6 w-full">
+            {pillars.map((p, i) => (
+              <PillarCardMobile key={i} pillar={p} index={i} />
+            ))}
+          </div>
+          {/* Desktop Layout */}
+          <motion.div style={{ x }} className="hidden md:flex gap-12 lg:gap-24 items-center md:px-[calc(50vw-210px)] w-max">
             {pillars.map((p, i) => {
               return (
                 <PillarCard key={i} pillar={p} index={i} scrollYProgress={scrollYProgress} />
@@ -81,6 +89,50 @@ export function FourPillars() {
         </div>
       </div>
     </motion.section>
+  );
+}
+
+function PillarCardMobile({ pillar, index }: { pillar: Pillar; index: number }) {
+  return (
+    <Link href={pillar.href} className="w-full block group/card">
+      <div className="flex flex-col gap-4 w-full">
+        {/* Header Box */}
+        <div className="w-full bg-[#eeeeee] rounded-xl px-6 py-3 flex items-center justify-between min-h-[56px]">
+          <span className="text-black/60 font-medium text-lg">{pillar.id}</span>
+          <div className="flex items-center gap-3">
+            <span className="text-black/80 font-medium text-base group-hover/card:text-[#084d43] transition-colors">Visit</span>
+            <ArrowUpRight className="w-5 h-5 text-black/40 transform group-hover/card:translate-x-1 group-hover/card:-translate-y-1 group-hover/card:text-[#084d43] transition-all" />
+          </div>
+        </div>
+
+        {/* Main Card */}
+        <div className="bg-[#eeeeee] p-4 rounded-[32px] flex flex-col gap-3">
+          <div className="bg-white rounded-[24px] h-[220px] relative overflow-hidden flex items-center justify-center p-8">
+            <div className="relative w-full h-full opacity-80">
+              <Image 
+                src={pillar.img} 
+                alt={pillar.title} 
+                fill 
+                className="object-contain grayscale brightness-110" 
+              />
+            </div>
+          </div>
+          
+          <div className="px-3 py-2">
+            <h3 className="text-xl font-medium text-[#242424] leading-tight">
+              {pillar.title}
+            </h3>
+          </div>
+        </div>
+
+        {/* Footer / Description Box */}
+        <div className="w-full bg-[#eeeeee] rounded-2xl p-5 min-h-[100px] flex items-center">
+          <p className="text-black/60 text-base font-normal leading-snug">
+            {pillar.desc}
+          </p>
+        </div>
+      </div>
+    </Link>
   );
 }
 
@@ -134,7 +186,7 @@ function PillarCard({ pillar, index, scrollYProgress }: { pillar: Pillar; index:
           <span className="text-black/60 font-medium text-lg">{pillar.id}</span>
           <div className="flex items-center gap-3">
             <span className="text-black/80 font-medium text-base group-hover/card:text-[#084d43] transition-colors">Visit</span>
-            <span className="text-xl text-black/40 transform group-hover/card:translate-x-1 group-hover/card:-translate-y-1 group-hover/card:text-[#084d43] transition-all">↗</span>
+            <ArrowUpRight className="w-5 h-5 text-black/40 transform group-hover/card:translate-x-1 group-hover/card:-translate-y-1 group-hover/card:text-[#084d43] transition-all" />
           </div>
         </motion.div>
 

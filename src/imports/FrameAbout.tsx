@@ -32,7 +32,7 @@ export default function FrameAbout() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            className="text-4xl sm:text-5xl lg:text-[64px] leading-[1.1] font-medium text-black wrap-break-word"
+            className="text-3xl sm:text-5xl lg:text-[64px] leading-[1.1] font-medium text-black wrap-break-word"
           >
             About Us
           </motion.h1>
@@ -43,7 +43,7 @@ export default function FrameAbout() {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="text-lg md:text-xl font-normal text-black w-full max-w-2xl"
           >
-            Kevda Bioworks is a premium biotech team focused on high-level wet lab execution — delivering accuracy to support preclinical decision edge.
+            Kevda supports biotech and biopharma teams with end-to-end wet-lab execution — combining scientific leadership with operational rigor.
           </motion.p>
 
           <motion.div 
@@ -52,11 +52,11 @@ export default function FrameAbout() {
             transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4"
           >
-            <button className="bg-[#d3b582] text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
+            <button className="bg-[#d3b582] w-full sm:w-auto whitespace-normal sm:whitespace-nowrap text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
               Start a Confidential Discussion
             </button>
-            <button className="bg-[#084d43] text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
-              Read our Capabilities
+            <button className="bg-[#084d43] w-full sm:w-auto whitespace-normal sm:whitespace-nowrap text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
+              Explore Capabilities
             </button>
           </motion.div>
           <motion.div 
@@ -66,7 +66,7 @@ export default function FrameAbout() {
             className="flex items-center gap-2 mt-2"
           >
             <div className="w-2.5 h-2.5 rounded-full bg-[#d3b582] opacity-50"></div>
-            <span className="text-xs text-gray-400 font-medium">NDA available upon request</span>
+            <span className="text-xs text-gray-400 font-medium">NDA available upon request.</span>
           </motion.div>
         </motion.div>
 
@@ -188,7 +188,7 @@ export default function FrameAbout() {
                       <MapPin className="w-5 h-5 md:w-6 md:h-6" fill="white" />
                    </div>
                    <div className="bg-[#084d43] text-white px-4 md:px-6 py-1.5 md:py-2.5 rounded-lg text-sm md:text-lg font-medium shadow-sm whitespace-nowrap">
-                      Arlington, MA
+                      Boston, MA
                    </div>
                  </div>
 
@@ -209,8 +209,8 @@ export default function FrameAbout() {
       <div id="about-contact">
         <UnifiedCTA 
           title={<>Start a confidential scope discussion. Tell us what you&apos;re building <span className="text-black/40">and what you need executed. We&apos;ll respond with scope questions and next steps.</span></>}
-          secondaryButtonText="Explore Site Map" 
-          secondaryButtonHref="/" 
+          secondaryButtonText="Explore Capabilities" 
+          secondaryButtonHref="/capabilities" 
         />
       </div>
     </PageWrapper>

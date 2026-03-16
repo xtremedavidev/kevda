@@ -54,7 +54,7 @@ function PhInfoDuotone() {
 function Frame48() {
   return (
     <div className="content-stretch flex items-center justify-center pr-[5.12px] py-[2.56px] relative shrink-0">
-      <p className="font-['Space_Grotesk:Regular',sans-serif] font-normal leading-[normal] relative shrink-0 text-[#6e4515] text-[10.24px] whitespace-nowrap">{` NDA available upon request`}</p>
+      <p className="font-['Space_Grotesk:Regular',sans-serif] font-normal leading-[normal] relative shrink-0 text-[#6e4515] text-[10.24px] whitespace-nowrap">{` NDA available upon request.`}</p>
     </div>
   );
 }
@@ -2509,7 +2509,7 @@ function PhInfoDuotone1() {
 function Frame49() {
   return (
     <div className="content-stretch flex items-center justify-center pr-[5.12px] py-[2.56px] relative shrink-0">
-      <p className="font-['Space_Grotesk:Regular',sans-serif] font-normal leading-[normal] relative shrink-0 text-[#6e4515] text-[10.24px] whitespace-nowrap">{` NDA available upon request`}</p>
+      <p className="font-['Space_Grotesk:Regular',sans-serif] font-normal leading-[normal] relative shrink-0 text-[#6e4515] text-[10.24px] whitespace-nowrap">{` NDA available upon request.`}</p>
     </div>
   );
 }

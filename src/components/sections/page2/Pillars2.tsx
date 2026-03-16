@@ -52,7 +52,7 @@ export function Pillars2() {
                         <Image src={card.img} alt={card.title} fill className="object-contain transform group-hover:scale-105 transition-transform" />
                      </div>
                      <div className="bg-white/90 backdrop-blur-md rounded-[24px] mt-4 p-6 sm:p-8 flex flex-col gap-4 shadow-sm border border-gray-100 flex-1 justify-center">
-                        <div className="bg-[#d3b582] rounded-full py-3 px-6 w-full flex justify-center text-center">
+                        <div className="bg-[#d3b582] w-full sm:w-auto whitespace-normal sm:whitespace-nowrap rounded-full py-3 px-6 w-full flex justify-center text-center">
                            <h3 className="text-lg sm:text-xl font-normal text-black break-words">{card.title}</h3>
                         </div>
                         <p className="text-center font-normal text-base sm:text-lg text-black">{card.desc}</p>

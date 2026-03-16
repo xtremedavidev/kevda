@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
@@ -7,12 +7,12 @@ const leaders = [
   {
     name: "Aaron Larsen",
     role: "leads scientific direction and execution quality.",
-    img: "/assets/03b1b2aaad1df3835db12d2cb4c7e2cf4315e000.png",
+    img: "/assets/Aaron.jpeg",
   },
   {
     name: "Joel Deutsch",
-    role: "Leads operations, infrastructure, and delivery reliability.",
-    img: "/assets/03b1b2aaad1df3835db12d2cb4c7e2cf4315e000.png",
+    role: "leads operations, infrastructure, and delivery reliability.",
+    img: "/assets/Joel.jpeg",
   },
 ];
 
@@ -30,7 +30,7 @@ export function Leadership() {
             Leadership
           </h2>
           <p className="text-base md:text-lg font-normal text-black">
-            Scientific standards and operational discipline â€” owned at the top.
+            Scientific standards and operational discipline — owned at the top.
           </p>
         </div>
 
@@ -39,14 +39,14 @@ export function Leadership() {
           {leaders.map((leader, i) => (
             <div key={i} className="flex flex-col gap-4 flex-1">
               {/* Photo */}
-              <div className="relative w-full max-w-[435px] aspect-[435/317] rounded-[28px] overflow-hidden bg-gray-100">
+              <div className="relative w-full max-w-[435px] aspect-9/10 rounded-[28px] overflow-hidden bg-gray-100">
                 <Image
                   src={leader.img}
                   alt={leader.name}
                   fill
-                  className="object-cover"
+                  className="object-cover w-full h-fit"
                 />
-                <div className="absolute inset-0 bg-black/[0.03] rounded-[28px]" />
+                <div className="absolute inset-0 bg-black/5 rounded-[28px]" />
               </div>
 
               {/* Name pill + description */}

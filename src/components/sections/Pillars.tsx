@@ -19,28 +19,28 @@ export function Pillars() {
             {/* Card 1 */}
             <div className="bg-[#f7f7f7] rounded-xl p-5 md:p-6 flex flex-col items-start gap-4">
                <div className="relative w-16 h-16 md:w-20 md:h-20">
-                 <Image src="/imgs/index/built-for-rigor.png" alt="Icon" fill className="object-contain" />
+                 <Image src="/imgs/about/about icons/scope.png" alt="Scope Icon" fill className="object-contain" />
                </div>
                <p className="text-[#666] text-lg md:text-xl font-medium leading-tight">Milestone-based scopes</p>
             </div>
             {/* Card 2 */}
             <div className="bg-[#f7f7f7] rounded-xl p-5 md:p-6 flex flex-col items-start gap-4">
                <div className="relative w-16 h-16 md:w-20 md:h-20">
-                 <Image src="/imgs/index/built-for-rigor.png" alt="Icon" fill className="object-contain" />
+                 <Image src="/imgs/index/how we work/execute.png" alt="Workflow Icon" fill className="object-contain" />
                </div>
                <p className="text-[#666] text-lg md:text-xl font-medium leading-tight">Disciplined workflows</p>
             </div>
             {/* Card 3 */}
             <div className="bg-[#f7f7f7] rounded-xl p-5 md:p-6 flex flex-col items-start gap-4">
                <div className="relative w-16 h-16 md:w-20 md:h-20">
-                 <Image src="/imgs/index/built-for-rigor.png" alt="Icon" fill className="object-contain" />
+                 <Image src="/imgs/security/nda.png" alt="QC Docs Icon" fill className="object-contain" />
                </div>
                <p className="text-[#666] text-lg md:text-xl font-medium leading-tight">QC and CoA-style documentation (where applicable)</p>
             </div>
             {/* Card 4 */}
             <div className="bg-[#f7f7f7] rounded-xl p-5 md:p-6 flex flex-col items-start gap-4">
                <div className="relative w-16 h-16 md:w-20 md:h-20">
-                 <Image src="/imgs/index/built-for-rigor.png" alt="Icon" fill className="object-contain" />
+                 <Image src="/imgs/security/Delivery.png" alt="Logistics Icon" fill className="object-contain" />
                </div>
                <p className="text-[#666] text-lg md:text-xl font-medium leading-tight">Turnkey execution from sequence to data</p>
             </div>

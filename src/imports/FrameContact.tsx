@@ -22,7 +22,7 @@ export default function FrameContact() {
   viewport={{ once: true, margin: "-100px" }}
   transition={{ duration: 0.8, ease: "easeOut" }} id="contact-hero" className="relative w-full pt-32 md:pt-48 pb-16 px-6 md:px-10 lg:px-16 overflow-hidden bg-white">
         <div className="relative z-10 w-full max-w-3xl flex flex-col gap-8 md:gap-4">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl leading-[1.1] font-medium text-black wrap-break-word">
+          <h1 className="text-[28px] sm:text-4xl lg:text-5xl leading-[1.1] font-medium text-black wrap-break-word">
             Contact
           </h1>
           
@@ -31,16 +31,16 @@ export default function FrameContact() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4">
-            <button className="bg-[#d3b582] text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
+            <button className="bg-[#d3b582] w-full sm:w-auto whitespace-normal sm:whitespace-nowrap text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
               Start a Confidential Discussion
             </button>
-            <button className="bg-[#084d43] text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
+            <button className="bg-[#084d43] w-full sm:w-auto whitespace-normal sm:whitespace-nowrap text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-normal whitespace-nowrap transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
               Request a Scope Proposal
             </button>
           </div>
           <div className="flex items-center gap-2 mt-2">
             <div className="w-2.5 h-2.5 rounded-full bg-[#d3b582] opacity-50"></div>
-            <span className="text-xs text-gray-400 font-medium">NDA available upon request</span>
+            <span className="text-xs text-gray-400 font-medium">NDA available upon request.</span>
           </div>
         </div>
       </motion.section>
@@ -67,10 +67,10 @@ export default function FrameContact() {
          
          <div className="flex items-center gap-4 mb-12">
             <input type="checkbox" className="w-5 h-5 accent-[#084d43]" />
-            <span className="text-sm text-gray-400">Request MNDA before sharing program details</span>
+            <span className="text-sm text-gray-400">Request NDA before sharing program details</span>
          </div>
 
-         <button className="bg-[#d3b582] text-white px-12 py-4 rounded-full font-medium transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
+         <button className="bg-[#d3b582] w-full sm:w-auto whitespace-normal sm:whitespace-nowrap text-white px-12 py-4 rounded-full font-medium transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer">
            Start a Confidential Discussion
          </button>
       </motion.section>
@@ -132,7 +132,7 @@ export default function FrameContact() {
       </motion.section>
 
       <div id="contact-cta">
-         <UnifiedCTA />
+         <UnifiedCTA secondaryButtonText="Request a Scope Proposal" />
       </div>
     </PageWrapper>
   );

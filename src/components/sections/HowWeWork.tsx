@@ -7,7 +7,7 @@ export function HowWeWork() {
   const steps = [
     { title: "Align", desc: "Define scope, controls, and timeline.", img: "/imgs/index/how we work/align.png" },
     { title: "Execute", desc: "Controlled workflows with checkpoints.", img: "/imgs/index/how we work/execute.png" },
-    { title: "Deliver", desc: "Verified data, protocols, and constructs.", img: "/imgs/index/how we work/deliver.png" }
+    { title: "Deliver", desc: "Clean, review-ready data packages.", img: "/imgs/index/how we work/deliver.png" }
   ];
 
   return (
@@ -40,19 +40,26 @@ export function HowWeWork() {
                  
                  {/* Horizontal dashed connector with circles */}
                  {i < steps.length - 1 && (
-                    <div className="hidden md:flex items-center justify-center grow max-w-[120px]">
-                       <div className="relative flex items-center w-full h-16">
-                          <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-300 bg-white absolute left-0 z-10" style={{ bottom: i % 2 === 0 ? '0' : 'auto', top: i % 2 === 0 ? 'auto' : '0' }} />
-                          <svg className="w-full h-full absolute inset-0 py-1" preserveAspectRatio="none" viewBox="0 0 100 100">
-                            {i % 2 === 0 ? (
-                              <path d="M 0 100 L 40 100 Q 50 100 50 90 L 50 10 Q 50 0 60 0 L 100 0" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 2" vectorEffect="non-scaling-stroke" />
-                            ) : (
-                              <path d="M 0 0 L 40 0 Q 50 0 50 10 L 50 90 Q 50 100 60 100 L 100 100" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 2" vectorEffect="non-scaling-stroke" />
-                            )}
-                          </svg>
-                          <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-300 bg-white absolute right-0 z-10" style={{ top: i % 2 === 0 ? '0' : 'auto', bottom: i % 2 === 0 ? 'auto' : '0' }} />
-                       </div>
-                    </div>
+                   <>
+                     <div className="hidden md:flex items-center justify-center grow max-w-[120px]">
+                        <div className="relative flex items-center w-full h-16">
+                           <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-300 bg-white absolute left-0 z-10" style={{ bottom: i % 2 === 0 ? '0' : 'auto', top: i % 2 === 0 ? 'auto' : '0' }} />
+                           <svg className="w-full h-full absolute inset-0 py-1" preserveAspectRatio="none" viewBox="0 0 100 100">
+                             {i % 2 === 0 ? (
+                               <path d="M 0 100 L 40 100 Q 50 100 50 90 L 50 10 Q 50 0 60 0 L 100 0" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 2" vectorEffect="non-scaling-stroke" />
+                             ) : (
+                               <path d="M 0 0 L 40 0 Q 50 0 50 10 L 50 90 Q 50 100 60 100 L 100 100" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="6 2" vectorEffect="non-scaling-stroke" />
+                             )}
+                           </svg>
+                           <div className="w-2.5 h-2.5 rounded-full border-2 border-slate-300 bg-white absolute right-0 z-10" style={{ top: i % 2 === 0 ? '0' : 'auto', bottom: i % 2 === 0 ? 'auto' : '0' }} />
+                        </div>
+                     </div>
+                     <div className="md:hidden flex items-center justify-center py-4 text-slate-300">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                           <path d="M12 5v14M19 12l-7 7-7-7" />
+                        </svg>
+                     </div>
+                   </>
                  )}
                </React.Fragment>
              ))}
