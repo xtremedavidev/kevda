@@ -9,6 +9,7 @@ import { UnifiedCTA } from "@/components/sections/UnifiedCTA";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 
 export default function FrameAbout() {
+  const [isSplineLoaded, setIsSplineLoaded] = React.useState(false);
   const sideNavItems = [
     { label: "Intro", sectionId: "about-hero" },
     { label: "Our Story", sectionId: "about-story" },
@@ -20,67 +21,55 @@ export default function FrameAbout() {
   return (
     <PageWrapper sideNavItems={sideNavItems}>
       <motion.section
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, margin: "-100px" }}
-  transition={{ duration: 0.8, ease: "easeOut" }} id="about-hero" className="relative w-full min-h-screen flex flex-col md:flex-row md:items-center pb-16 px-6 md:px-10 lg:px-16 bg-white overflow-visible">
+        initial={{ opacity: 0 }}
+        animate={isSplineLoaded ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 1 }}
+        id="about-hero" 
+        className="relative w-full min-h-screen flex flex-col md:flex-row md:items-center pb-16 px-6 md:px-10 lg:px-16 bg-white overflow-visible"
+      >
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          initial={{ opacity: 0, y: 30 }}
+          animate={isSplineLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
           className="relative z-10 w-full max-w-3xl flex flex-col gap-8 md:gap-4 mt-24 md:mt-0 order-1"
         >
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            className="text-3xl sm:text-5xl lg:text-[64px] leading-[1.1] font-medium text-black wrap-break-word"
-          >
+          <h1 className="text-3xl sm:text-5xl lg:text-[64px] leading-[1.1] font-medium text-black wrap-break-word">
             About Us
-          </motion.h1>
+          </h1>
           
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="text-lg md:text-xl font-normal text-black w-full max-w-2xl"
-          >
+          <p className="text-lg md:text-xl font-normal text-black w-full max-w-2xl">
             Kevda supports biotech and biopharma teams with end-to-end wet-lab execution — combining scientific leadership with operational rigor.
-          </motion.p>
+          </p>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4"
-          >
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4">
             <Link href="/contact" className="bg-[#d3b582] w-full sm:w-auto text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-normal transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer flex items-center justify-center text-center whitespace-normal">
               Start a Confidential Discussion
             </Link>
             <Link href="/capabilities" className="bg-[#084d43] w-full sm:w-auto text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-normal transition-all duration-300 hover:scale-[1.03] hover:shadow-xl hover:brightness-110 active:scale-[0.98] cursor-pointer flex items-center justify-center text-center whitespace-normal">
               Explore Capabilities
             </Link>
-          </motion.div>
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="flex items-center gap-2 mt-2"
-          >
+          </div>
+          <div className="flex items-center gap-2 mt-2">
             <div className="w-2.5 h-2.5 rounded-full bg-[#d3b582] opacity-50"></div>
             <span className="text-xs text-gray-400 font-medium">NDA available upon request.</span>
-          </motion.div>
+          </div>
         </motion.div>
 
         {/* Background Graphic */}
-        <div className="relative md:absolute md:inset-0 pointer-events-none opacity-80 w-full h-[400px] md:h-full order-2 md:order-0 mt-12 md:mt-0">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={isSplineLoaded ? { opacity: 0.8, scale: 1 } : { opacity: 0, scale: 0.95 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="relative md:absolute md:inset-0 pointer-events-none w-full h-[400px] md:h-full order-2 md:order-0 mt-12 md:mt-0"
+        >
           <Suspense fallback={<div className="w-full h-full bg-white" />}>
             <Spline 
               scene="/spline/home.splinecode" 
+              onLoad={() => setIsSplineLoaded(true)}
               className="w-full h-full object-cover md:pl-40 lg:pl-80 xl:pl-160 md:scale-105 lg:scale-115 xl:scale-130"
             />
           </Suspense>
-        </div>
+        </motion.div>
 
         {/* Scroll indicator */}
         <div className="hidden lg:flex absolute bottom-12 right-[10%] items-center gap-2 text-[#8b8b8b]">
@@ -91,10 +80,13 @@ export default function FrameAbout() {
 
       {/* Who We Are */}
       <motion.section
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, margin: "-100px" }}
-  transition={{ duration: 0.8, ease: "easeOut" }} id="about-story" className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }} 
+        id="about-story" 
+        className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10"
+      >
         <div className="w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
           <div className="w-full lg:w-1/2 aspect-4/5 bg-[#f5efe4] rounded-[40px] border-[#d3b582] border-2 overflow-hidden relative shadow-sm">
             <Image src="/assets/abstract_2.jpg" alt="Lab Work" fill className="object-cover" />
@@ -110,10 +102,13 @@ export default function FrameAbout() {
 
       {/* Operating Philosophy */}
       <motion.section
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, margin: "-100px" }}
-  transition={{ duration: 0.8, ease: "easeOut" }} id="about-philosophy" className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10">
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }} 
+        id="about-philosophy" 
+        className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10"
+      >
         <div className="w-full max-w-[1600px] mx-auto flex flex-col gap-24">
           <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-24">
             <div className="w-full lg:w-1/2 flex flex-col gap-6 text-left">
@@ -148,7 +143,6 @@ export default function FrameAbout() {
                     </div>
                  </div>
                  
-                 {/* Horizontal dashed connector with circles */}
                  {i < 3 && (
                     <div className="hidden md:flex items-center justify-center grow max-w-[100px]">
                        <div className="relative flex items-center w-full h-16">
@@ -172,10 +166,13 @@ export default function FrameAbout() {
 
       {/* Footprint */}
       <motion.section
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, margin: "-100px" }}
-  transition={{ duration: 0.8, ease: "easeOut" }} id="about-footprint" className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10 flex flex-col items-center group">
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }} 
+        id="about-footprint" 
+        className="bg-white w-full py-20 md:py-32 px-6 md:px-10 lg:px-16 relative z-10 flex flex-col items-center group"
+      >
         <div className="w-full max-w-[1600px] flex flex-col items-center gap-16">
           <h2 className="text-3xl md:text-6xl font-medium text-black text-center">Footprint</h2>
           <div className="relative w-full h-[350px] sm:h-[450px] md:h-auto md:aspect-[21/9] rounded-[40px] overflow-hidden shadow-sm flex items-center justify-center bg-[#f6f6f6]">
